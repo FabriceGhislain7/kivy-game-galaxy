@@ -1,21 +1,109 @@
+# Galaxy Runner - Main Game UI Layout
+#
+# This Kivy language file defines the primary game interface layout including:
+# - Space background imagery
+# - 3D perspective configuration for tunnel effect
+# - Menu system integration
+# - HUD elements (score display)
+
+# ========================================
+# MODULE IMPORTS
+# ========================================
+# Import the menu module to make MenuWidget available
+# This allows the main game widget to include the menu overlay
 #:import menu menu
 
+# ========================================
+# ROOT WIDGET DEFINITION
+# ========================================
+# Define MainWidget as the root widget for the application
+# This creates the primary game container that holds all other elements
 MainWidget:
 
-
 <MainWidget>:
+    # ========================================
+    # BACKGROUND LAYER
+    # ========================================
+    # Render space background behind all other elements
+    # canvas.before ensures this renders first (bottom layer)
     canvas.before:
         Rectangle:
+            # Cover the entire widget area with background image
+            # self.size automatically matches the MainWidget dimensions
             size: self.size
+            
+            # Space background image path
+            # bg1.jpg should contain a starfield or space nebula
+            # This provides visual context for the space tunnel theme
             source: 'images/bg1.jpg'
+
+    # ========================================
+    # WIDGET REFERENCES
+    # ========================================
+    # Create reference to menu widget for programmatic control
+    # This allows main.py to show/hide menu by changing opacity
+    # menu_widget property in MainWidget class references this widget
     menu_widget: menu_widget
+
+    # ========================================
+    # 3D PERSPECTIVE CONFIGURATION
+    # ========================================
+    # Configure the vanishing point for 3D tunnel perspective effect
+    # These values are used by transforms.py for mathematical calculations
+    
+    # Horizontal vanishing point (screen center)
+    # self.width/2 places vanishing point at horizontal center
+    # This creates symmetrical perspective distortion
     perspective_point_x: self.width/2
+    
+    # Vertical vanishing point (upper portion of screen)
+    # self.height * 0.75 places vanishing point at 75% screen height
+    # This creates the classic "tunnel ahead" perspective where:
+    # - Bottom of screen appears close (large objects)
+    # - 75% up the screen appears distant (vanishing point)
+    # - Creates natural forward-motion illusion
     perspective_point_y: self.height * 0.75
+
+    # ========================================
+    # MENU OVERLAY SYSTEM
+    # ========================================
+    # Integrated menu widget that appears over the game
+    # Handles start screen and game over functionality
     MenuWidget:
+        # Widget identifier for programmatic access
+        # Referenced by menu_widget property above
+        # Allows main.py to control menu visibility and interaction
         id: menu_widget
+
+    # ========================================
+    # HUD ELEMENTS
+    # ========================================
+    # Score display in top-left corner
+    # Designed to be visible but not intrusive during gameplay
     Label:
+        # Dynamic score text from MainWidget
+        # root.score_txt is updated in real-time as player progresses
+        # Format: "SCORE: {current_y_loop}"
         text: root.score_txt
+        
+        # Readable font size using density-independent pixels
+        # dp(20) provides clear text without being too large
+        # Smaller than menu fonts to maintain hierarchy
         font_size: dp(20)
+        
+        # Technical font matching button text
+        # Eurostile provides clean, space-appropriate typography
+        # Consistent with menu button font for UI coherence
         font_name: 'fonts/Eurostile.ttf'
+        
+        # Position in top-left corner
+        # "x": 0 = left edge of screen (no horizontal offset)
+        # "top": 1 = top edge of screen (100% height position)
+        # This creates a traditional HUD score placement
         pos_hint: {"x": 0, "top": 1}
+        
+        # Label dimensions as percentage of parent size
+        # .18, .18 = 18% of parent width and height
+        # Creates a compact but readable score area
+        # Square ratio maintains consistent proportions across devices
         size_hint: .18, .18
