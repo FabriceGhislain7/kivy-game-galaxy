@@ -1,105 +1,22 @@
-# Galaxy Runner - Menu UI Layout
-# 
-# This Kivy language file defines the visual layout and styling for the MenuWidget.
-# Creates a polished overlay interface for game start and game over screens with:
-# - Semi-transparent dark background
-# - Space-themed typography  
-# - Centered layout with responsive positioning
-# - Custom styled action button
-
 <MenuWidget>:
-    # ========================================
-    # BACKGROUND OVERLAY
-    # ========================================
-    # Creates a semi-transparent dark overlay that:
-    # - Dims the game background for better text readability
-    # - Provides visual separation between menu and game
-    # - Uses canvas.before to render behind child widgets
     canvas.before:
         Color:
-            # Semi-transparent black overlay (80% opacity)
-            # rgba: red, green, blue, alpha
-            # This provides good contrast without completely hiding the game
             rgba: 0, 0, 0, .8
         Rectangle:
-            # Cover the entire widget area
-            # self.size automatically matches the MenuWidget dimensions
             size: self.size
 
-    # ========================================
-    # TITLE LABEL
-    # ========================================
-    # Main title text that changes based on game state:
-    # - "G   A   L   A   X   Y" during start screen
-    # - "G  A  M  E    O  V  E  R" when game ends
     Label:
-        # Large font size using density-independent pixels
-        # dp(60) ensures consistent size across different screen densities
         font_size: dp(60)
-        
-        # Custom space-themed font for dramatic effect
-        # Sackers Gothic provides a futuristic, elegant appearance
-        # Perfect for sci-fi game aesthetic
         font_name: 'fonts/Sackers-Gothic-Std-Light.ttf'
-        
-        # Dynamic text content from parent widget
-        # root.parent refers to MainWidget which contains menu_title property
-        # This allows the title to change programmatically (start/game over)
         text: root.parent.menu_title
-        
-        # Positioning using relative coordinates
-        # center_x: .5 = horizontal center (50% of parent width)
-        # center_y: .6 = slightly above vertical center (60% of parent height)
-        # This creates an aesthetically pleasing layout with title above button
         pos_hint: { "center_x": .5, "center_y": .6 }
 
-    # ========================================
-    # ACTION BUTTON
-    # ========================================
-    # Main action button that handles game start/restart
-    # Changes text and functionality based on game state
     Button:
-        # Medium font size for button text
-        # Smaller than title but still clearly readable
         font_size: dp(30)
-        
-        # Technical font for button text
-        # Eurostile provides clean, readable text for UI elements
-        # Complements the dramatic title font
         font_name: 'fonts/Eurostile.ttf'
-        
-        # Dynamic button text from parent widget
-        # "START" initially, "RESTART" after game over
-        # root.parent.menu_button_title is managed by MainWidget
         text: root.parent.menu_button_title
-        
-        # Button positioning
-        # center_x: .5 = horizontal center (aligned with title)
-        # center_y: .3 = lower third of screen (below title)
-        # Creates balanced vertical spacing
         pos_hint: { "center_x": .5, "center_y": .3 }
-        
-        # Button dimensions as percentage of parent size
-        # size_hint: width, height as ratios (0.0 to 1.0)
-        # .2 = 20% of parent width (compact but clickable)
-        # .15 = 15% of parent height (proportional to width)
         size_hint: .2, .15
-        
-        # Button press event handler
-        # Calls the menu button handler in MainWidget
-        # This triggers game start/restart logic
         on_press: root.parent.on_menu_button_pressed()
-        
-        # Remove default button background
-        # background_normal: '' disables the default gray button appearance
-        # This allows us to use custom background_color instead
         background_normal: ''
-        
-        # Custom button color scheme
-        # background_color: red, green, blue, alpha
-        # (1, .3, .4, .85) creates a vibrant red/pink color
-        # - High red component (1.0) for attention-grabbing appearance
-        # - Low green (.3) and medium blue (.4) for color balance  
-        # - High alpha (.85) for solid appearance with slight transparency
-        # This color stands out against the dark background
         background_color: 1, .3, .4, .85
