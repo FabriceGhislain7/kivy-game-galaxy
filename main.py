@@ -13,15 +13,11 @@ from kivy.core.audio import Sound, SoundLoader
 from kivy.core.window import Window
 from kivy.graphics.context_instructions import Color
 from kivy.graphics.vertex_instructions import Line, Quad, Triangle
-from kivy.lang import Builder
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivy.uix.relativelayout import RelativeLayout
 
 Config.set("graphics", "width", "900")
 Config.set("graphics", "height", "400")
-
-Builder.load_file("menu.kv")
-
 
 class MainWidget(RelativeLayout):
     """Main game widget handling rendering, state, and interaction."""
