@@ -1,24 +1,3 @@
-﻿# Core runtime
-Kivy==2.3.1
-Kivy-Garden==0.1.5
-Pillow==10.4.0
-
-# Runtime HTTP stack used by Kivy providers
-requests==2.32.4
-urllib3==2.5.0
-certifi==2025.8.3
-charset-normalizer==3.4.3
-idna==3.10
-
-# Optional Windows-specific Kivy binary dependencies
-kivy-deps.angle==0.4.0; platform_system == "Windows"
-kivy-deps.glew==0.3.1; platform_system == "Windows"
-kivy_deps.sdl2==0.8.0; platform_system == "Windows"
-kivy_deps.gstreamer==0.3.4; platform_system == "Windows"
-pywin32==311; platform_system == "Windows"
-pypiwin32==223; platform_system == "Windows"
-
-# Utility packages frequently used by Kivy ecosystem
-docutils==0.22
-filetype==1.2.0
-Pygments==2.19.2
+﻿Kivy==2.3.1
+pytest==8.3.2
+ruff==0.6.9

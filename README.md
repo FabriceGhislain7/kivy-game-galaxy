@@ -1,39 +1,55 @@
 ﻿# Galaxy Runner
 
-Galaxy Runner is an arcade tunnel runner built with Kivy.
-The project focuses on a clean 2.5D perspective effect, procedural path generation,
-and cross-platform controls (keyboard + touch).
+A production-minded Kivy game starter built as a clean, documented, and extensible codebase.
 
-## Highlights
+This repository is a full restart of the original prototype and is designed to be maintainable,
+teachable, and ready for commercial product iteration.
 
-- Real-time perspective projection with a configurable vanishing point
-- Procedural lane/tile generation with boundary-aware turns
-- Collision system between ship vertices and tiles
-- Menu overlay with start/restart game flow
-- Audio cues for intro, gameplay, impact, and game over
-- Desktop and mobile-friendly input handling
+## Product Direction
+
+Galaxy Runner is an arcade reflex game with a pseudo-3D tunnel look, where the player avoids incoming obstacles, collects score over time, and progressively faces higher speed and challenge.
+
+## Key Goals
+
+- Clean architecture with separation of concerns
+- Fast onboarding for developers new to Kivy
+- Documentation from zero to advanced implementation
+- Reliable baseline for scaling into a sellable game product
 
 ## Tech Stack
 
 - Python 3.10+
 - Kivy 2.3.1
-- Kivy language (`.kv`) for UI layout
+- Pytest + Ruff for quality checks
 
-## Project Structure
+## Repository Structure
 
 ```text
-kivy-game-galaxy/
-|-- main.py            # Game loop, rendering orchestration, state machine
-|-- transforms.py      # Perspective and coordinate transformation helpers
-|-- user_actions.py    # Keyboard and touch input handlers
-|-- menu.py            # Menu overlay widget behavior
-|-- galaxy.kv          # Main scene/widget declarations
-|-- menu.kv            # Menu widget styling and behavior bindings
-|-- API_REFERENCE.md   # Developer-oriented API and architecture notes
-|-- requirements.txt   # Runtime dependencies
-|-- audio/             # Sound effects and music
-|-- images/            # Background and visual assets
-|-- fonts/             # Custom fonts used in UI
+.
+|-- docs/
+|   |-- architecture.md
+|   |-- roadmap.md
+|   |-- technical-spec.md
+|   |-- testing.md
+|   `-- steps/
+|       |-- 01-installation.md
+|       |-- ...
+|       `-- 11-quality-tooling.md
+|-- src/
+|   `-- galaxy_runner/
+|       |-- __init__.py
+|       |-- app.py
+|       |-- config.py
+|       |-- core.py
+|       `-- game.py
+|-- tests/
+|   `-- test_core.py
+|-- main.py
+|-- requirements.txt
+|-- pyproject.toml
+|-- CONTRIBUTING.md
+|-- CHANGELOG.md
+`-- LICENSE
 ```
 
 ## Quick Start
@@ -42,10 +58,8 @@ kivy-game-galaxy/
 
 ```bash
 python -m venv .venv
-# Windows (PowerShell)
+# Windows PowerShell
 .\.venv\Scripts\Activate.ps1
-# Linux/macOS
-source .venv/bin/activate
 ```
 
 2. Install dependencies.
@@ -62,50 +76,27 @@ python main.py
 
 ## Controls
 
-- Desktop:
-  - `Left Arrow`: move left
-  - `Right Arrow`: move right
-- Touch devices:
-  - Touch left half of the screen: move left
-  - Touch right half of the screen: move right
-  - Release touch: stop lateral movement
+- Left Arrow / A: move left
+- Right Arrow / D: move right
+- R: restart after game over
 
-## Gameplay Model
+## Quality Commands
 
-- The ship remains visually centered while the world shifts laterally.
-- Forward movement is continuous once the game starts.
-- Score increases with completed path loops.
-- Collision ends the run and shows the game-over menu.
+```bash
+ruff check .
+pytest -q
+```
 
-## Configuration Notes
+## Documentation Path
 
-Core gameplay constants are defined in `MainWidget` (`main.py`):
+Read `docs/steps/` in order, from installation to quality and release practices.
 
-- `SPEED`, `SPEED_X`
-- `V_NB_LINES`, `H_NB_LINES`
-- `NB_TILES`
-- `SHIP_WIDTH`, `SHIP_HEIGHT`, `SHIP_BASE_Y`
-
-You can tune these safely without changing the overall architecture.
-
-## Development Notes
-
-- The repository includes media assets tracked in Git.
-- Generated Python bytecode and virtual environments are ignored via `.gitignore`.
-- The codebase is intentionally small and modular to simplify experimentation.
-
-## Troubleshooting
-
-- If audio files do not play, verify your environment has Kivy audio providers enabled.
-- If the window does not open on Windows, confirm graphics dependencies from `requirements.txt` are installed.
-- If controls do not respond, ensure the game has started from the menu overlay.
+## Visual Features`r`n`r`n- Pseudo-3D tunnel rendering with perspective grid`r`n- Animated starfield background`r`n- Depth-based obstacle scaling and motion`r`n- Neon sci-fi HUD style`r`n`r`n## Status`r`n`r`n- Working playable baseline
+- Documented architecture and technical spec
+- Testable core logic utilities
+- Initial CI-ready local quality workflow
 
 ## License
 
-This project is licensed under the MIT License.
-See `LICENSE` for details.
-
-## Contributing
-
-Please read CONTRIBUTING.md before opening a pull request.
+MIT. See `LICENSE`.
 
